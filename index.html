@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MUSAudio Demo</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>MUSAudio: Multi-Source Spatial Audio Generation via MLLM-Based Planning and Flow-Matching</h1>
+    <p class="subtitle">Automatic mono-to-FOA spatial audio generation with agentic source planning and latent flow matching.</p>
+    <nav class="buttons">
+      <a href="https://github.com/MUSAudio/MUSAudio">Code</a>
+      <a href="#audiovae">FOA-VAE Demos</a>
+      <a href="#generation">Spatial Generation Demos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card" id="overview">
+      <h2>Abstract</h2>
+      <p>Spatial audio enhances immersion, yet most available audio is recorded in mono, lacking explicit spatial cues. Existing audio spatialization methods typically require manually specified source positions and struggle to model complex acoustic scenes with overlapping, dynamic sources. In this paper, we present MUSAudio, a novel agentic framework for automatic multi-source First-Order Ambisonics (FOA) generation from mono audio. Instead of treating spatialization as a naive signal-to-signal mapping, MUSAudio operates as a two-stage agent that seamlessly integrates audio perception, hierarchical planning, and conditional generation. Given a mono input and an optional text prompt, the agent leverages a multi-modal LLM to
+parse acoustic event attributes, reason over temporal activities, and synthesize a structured spatiotemporal plan. To support efficient plan-conditioned generation, we introduce a latent flow-matching generator with multi-source attention routing mechanism that aligns source-wise spatial conditions with temporally relevant latent regions, and an FOA-aware VAE that preserves cross-channel spatial coherence through spatially informed supervision. Extensive experiments on a mixed simulated-real dataset show that the agentic planning stage substantially improves source-level spatial grounding, enabling MUSAudio to achieve superior spatial accuracy and perceptual quality.</p>
+      <figure>
+        <object class="main-figure teaser-pdf" data="assets/img/teaser.pdf" type="application/pdf"><a href="assets/img/teaser.pdf">View teaser PDF</a></object>
+        <figcaption>Teaser figure for MUSAudio.</figcaption>
+      </figure>
+    </section>
+
+    <section class="card" id="audiovae">
+      <h2>FOA-Aware Audio VAE Reconstruction</h2>
+      <p>Selected 25-second FOA reconstruction examples. All tracks keep the original 4-channel FOA format, are resampled to 24 kHz, and are normalized with one global peak across the four channels.</p>
+      <div id="audiovae-demos" class="demo-list"></div>
+    </section>
+
+    <section class="card" id="generation">
+      <h2>Agentic Spatial Generation vs. Baselines</h2>
+      <p>Selected moving-source STARSS examples. The visual layout uses ground-truth trajectories; source positions move in world coordinates while the listener heading changes across front/right/back/left views. The GT reference is provided as mono W-channel audio only; method videos contain the corresponding MagLS/SOFA binaural audio.</p>
+      <div id="generation-demos" class="demo-list"></div>
+    </section>
+  </main>
+
+  <script src="assets/demo-data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
